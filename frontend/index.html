@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sistema de registro e gestão de ocorrências urbanas.">
+  <title>Zeladoria Inteligente</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#inicio" aria-label="Zeladoria Inteligente - início">
+    <span class="brand-mark">ZI</span>
+    <span class="brand-text">
+      <strong>Zeladoria Inteligente</strong>
+      <small>Atendimento urbano</small>
+    </span>
+  </a>
+
+  <nav aria-label="Navegação principal">
+    <button class="nav-link active" data-view="cidadao">Abrir chamado</button>
+    <button class="nav-link" data-view="admin">Painel administrativo</button>
+  </nav>
+</header>
+
+<main id="inicio" class="page-shell">
+  <section id="view-cidadao" class="view">
+    <section class="hero hero-friendly">
+      <div class="hero-copy">
+        <span class="eyebrow">Canal do cidadão</span>
+        <h1>Informe um problema urbano de forma simples e rápida.</h1>
+        <p>
+          Encontrou buraco na rua, falha de iluminação, lixo acumulado ou outro problema em espaço público?
+          Registre a ocorrência e ajude a prefeitura a organizar o atendimento.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn primary" href="#titulo-form"><span>Registrar agora</span><span aria-hidden="true">→</span></a>
+          <button class="btn ghost" type="button" data-view-switch="admin">Sou da equipe administrativa</button>
+        </div>
+
+        <div class="hero-highlights" aria-label="Vantagens do sistema">
+          <article>
+            <strong>Envio rápido</strong>
+            <span>Formulário direto e fácil de preencher</span>
+          </article>
+          <article>
+            <strong>Informação organizada</strong>
+            <span>Categoria, endereço e descrição em um só lugar</span>
+          </article>
+          <article>
+            <strong>Acompanhamento interno</strong>
+            <span>Chamados podem ser tratados pela equipe gestora</span>
+          </article>
+        </div>
+      </div>
+
+      <aside class="hero-panel" aria-label="Como funciona">
+        <span class="eyebrow">Como funciona</span>
+        <ol class="steps-list">
+          <li>
+            <span class="step-dot">1</span>
+            <div>
+              <strong>Descreva o problema</strong>
+              <p>Selecione a categoria e informe o endereço ou ponto de referência.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-dot">2</span>
+            <div>
+              <strong>Adicione seus dados</strong>
+              <p>Informe seu nome e, se quiser, e-mail ou telefone para retorno.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-dot">3</span>
+            <div>
+              <strong>Envie a ocorrência</strong>
+              <p>O chamado será registrado para análise e encaminhamento interno.</p>
+            </div>
+          </li>
+        </ol>
+      </aside>
+    </section>
+
+    <section class="info-grid" aria-label="Orientações para abertura do chamado">
+      <article class="info-card">
+        <h2>O que informar</h2>
+        <p>Descreva o problema com clareza, mencionando rua, número, ponto de referência e qualquer detalhe útil.</p>
+      </article>
+      <article class="info-card">
+        <h2>Quando usar</h2>
+        <p>Use este canal para ocorrências urbanas, como iluminação, limpeza, sinalização, calçadas e vias públicas.</p>
+      </article>
+      <article class="info-card">
+        <h2>Dica rápida</h2>
+        <p>Quanto mais objetiva for a descrição, mais fácil será para a equipe localizar e tratar a ocorrência.</p>
+      </article>
+    </section>
+
+    <section class="content-layout" aria-labelledby="titulo-form">
+      <section class="panel form-panel">
+        <div class="section-heading">
+          <div>
+            <span class="step">01</span>
+            <div>
+              <h2 id="titulo-form">Registrar nova ocorrência</h2>
+              <p>Preencha os dados abaixo para abrir o chamado.</p>
+            </div>
+          </div>
+          <p>Campos com * são obrigatórios.</p>
+        </div>
+
+        <form id="form-ocorrencia" novalidate>
+          <div class="grid two">
+            <label>
+              Categoria *
+              <select id="categoria" required>
+                <option value="">Selecione o tipo de problema</option>
+              </select>
+              <small class="field-error"></small>
+            </label>
+
+            <label>
+              Endereço ou ponto de referência *
+              <input id="endereco" maxlength="255" autocomplete="street-address" placeholder="Ex.: Rua das Flores, 120" required>
+              <small class="field-error"></small>
+            </label>
+          </div>
+
+          <label>
+            Descrição detalhada *
+            <textarea id="descricao" rows="5" minlength="10" maxlength="1500" placeholder="Explique o problema, diga onde ele está e inclua qualquer detalhe que ajude no atendimento." required></textarea>
+            <span class="field-meta">
+              <small class="field-error"></small>
+              <small id="contador">0/1500</small>
+            </span>
+          </label>
+
+          <fieldset>
+            <legend>Dados para contato</legend>
+            <p class="hint">Essas informações ajudam na identificação do chamado e em eventual retorno da equipe.</p>
+
+            <div class="grid three">
+              <label>
+                Nome *
+                <input id="contato-nome" maxlength="150" autocomplete="name" required placeholder="Seu nome completo">
+                <small class="field-error"></small>
+              </label>
+
+              <label>
+                E-mail
+                <input id="contato-email" type="email" maxlength="150" autocomplete="email" placeholder="voce@email.com">
+                <small class="field-error"></small>
+              </label>
+
+              <label>
+                Telefone
+                <input id="contato-telefone" maxlength="30" autocomplete="tel" placeholder="(11) 99999-9999">
+                <small class="field-error"></small>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="form-actions">
+            <p id="form-status" class="feedback" role="status" aria-live="polite"></p>
+            <button class="btn primary" type="submit"><span>Enviar ocorrência</span><span aria-hidden="true">→</span></button>
+          </div>
+        </form>
+      </section>
+
+      <aside class="panel side-panel" aria-label="Orientações adicionais">
+        <span class="eyebrow">Antes de enviar</span>
+        <h2>Revise as informações</h2>
+        <ul class="tips-list">
+          <li>Confirme se o endereço está correto.</li>
+          <li>Descreva apenas um problema principal por chamado.</li>
+          <li>Use uma linguagem clara e objetiva.</li>
+          <li>Inclua telefone ou e-mail se desejar retorno.</li>
+        </ul>
+
+        <div class="side-note">
+          <strong>Exemplos de categorias</strong>
+          <div class="tag-list">
+            <span>Buraco na via</span>
+            <span>Iluminação</span>
+            <span>Limpeza urbana</span>
+            <span>Sinalização</span>
+            <span>Calçada</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+  </section>
+
+  <section id="view-admin" class="view hidden">
+    <div id="login-section" class="auth-wrap">
+      <section class="auth-layout">
+        <aside class="panel auth-info">
+          <span class="eyebrow">Uso interno</span>
+          <h1>Painel de gestão</h1>
+          <p>Área destinada à equipe responsável pelo acompanhamento das ocorrências registradas no sistema.</p>
+
+          <div class="auth-info-list">
+            <article>
+              <strong>Consultar chamados</strong>
+              <span>Visualize todas as ocorrências registradas.</span>
+            </article>
+            <article>
+              <strong>Atualizar andamento</strong>
+              <span>Altere o status para pendente, em andamento ou concluído.</span>
+            </article>
+            <article>
+              <strong>Organizar o atendimento</strong>
+              <span>Filtre, pesquise e trate os chamados com mais praticidade.</span>
+            </article>
+          </div>
+        </aside>
+
+        <section class="panel auth-card">
+          <span class="eyebrow">Acesso restrito</span>
+          <h1>Entrar no painel</h1>
+          <p>Use as credenciais de operador para acessar a área administrativa.</p>
+
+          <form id="form-login">
+            <label>
+              Usuário ou e-mail
+              <input id="usuario" autocomplete="username" placeholder="admin@zeladoria.local" required>
+            </label>
+
+            <label>
+              Senha
+              <input id="senha" type="password" autocomplete="current-password" placeholder="••••••••" required>
+            </label>
+
+            <button class="btn primary full" type="submit">Entrar no painel</button>
+            <p id="status-login" class="feedback" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+      </section>
+    </div>
+
+    <div id="dashboard" class="hidden">
+      <div class="dashboard-head">
+        <div>
+          <span class="eyebrow">Gestão de ocorrências</span>
+          <h1>Painel administrativo</h1>
+          <p id="admin-welcome">Acompanhe e atualize os chamados registrados.</p>
+        </div>
+        <button id="btn-sair" class="btn ghost">Sair</button>
+      </div>
+
+      <div class="stats" aria-label="Resumo das ocorrências">
+        <article>
+          <span>Total</span>
+          <strong id="stat-total">0</strong>
+          <small>Chamados registrados</small>
+        </article>
+        <article>
+          <span>Pendentes</span>
+          <strong id="stat-pendente">0</strong>
+          <small>Aguardando atendimento</small>
+        </article>
+        <article>
+          <span>Em andamento</span>
+          <strong id="stat-andamento">0</strong>
+          <small>Em análise ou execução</small>
+        </article>
+        <article>
+          <span>Concluídas</span>
+          <strong id="stat-concluido">0</strong>
+          <small>Finalizadas</small>
+        </article>
+      </div>
+
+      <section class="panel panel-strong">
+        <div class="toolbar">
+          <div>
+            <h2>Ocorrências registradas</h2>
+            <p>Pesquise, filtre e atualize os chamados conforme o andamento.</p>
+          </div>
+          <button id="btn-atualizar" class="btn secondary">↻ Atualizar lista</button>
+        </div>
+
+        <div class="filters">
+          <label class="search">
+            <span>⌕</span>
+            <input id="busca" type="search" placeholder="Buscar por descrição, endereço ou número do chamado">
+          </label>
+
+          <label class="filter-select">
+            <span>Status</span>
+            <select id="filtro-status" aria-label="Filtrar por status">
+              <option value="">Todos os status</option>
+              <option>Pendente</option>
+              <option>Em Andamento</option>
+              <option>Concluído</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="lista-ocorrencias" class="occ-list" aria-live="polite"></div>
+      </section>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <p>Zeladoria Inteligente • Sistema para registro e gestão de ocorrências urbanas</p>
+</footer>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+const API_URL = `${location.origin}/api`;
+let tokenJWT = sessionStorage.getItem('zeladoria_token') || '';
+let ocorrenciasCache = [];
+const $ = s => document.querySelector(s);
+const esc = v => String(v ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+
+function setView(view){
+  document.querySelectorAll('.view').forEach(v=>v.classList.add('hidden'));
+  $(`#view-${view}`).classList.remove('hidden');
+  document.querySelectorAll('.nav-link').forEach(b=>b.classList.toggle('active', b.dataset.view===view));
+  if(view==='admin') renderAuthState();
+  if(view==='cidadao') window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.nav-link').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
+document.querySelectorAll('[data-view-switch]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.viewSwitch)));
+
+async function api(path, options={}){
+  const headers = {'Content-Type':'application/json', ...(options.headers||{})};
+  if(tokenJWT) headers.Authorization = `Bearer ${tokenJWT}`;
+  const response = await fetch(`${API_URL}${path}`, {...options, headers});
+  if(response.status===401 && path!='/Auth/login'){ logout(false); throw new Error('Sua sessão expirou. Entre novamente.'); }
+  const data = response.status===204 ? null : await response.json().catch(()=>null);
+  if(!response.ok) throw new Error(data?.mensagem || 'Não foi possível concluir a operação.');
+  return data;
+}
+function toast(msg, type='success'){
+  const el=$('#toast');
+  el.textContent=msg;
+  el.className=`toast show ${type}`;
+  clearTimeout(window.toastTimer);
+  window.toastTimer=setTimeout(()=>el.className='toast',3500);
+}
+
+async function carregarCategorias(){
+  try {
+    const cats=await api('/Categorias');
+    $('#categoria').innerHTML='<option value="">Selecione o tipo de problema</option>'+cats.map(c=>`<option value="${c.id}">${esc(c.nome)}</option>`).join('');
+  }
+  catch {
+    $('#categoria').innerHTML='<option value="">Categorias indisponíveis</option>';
+  }
+}
+
+$('#descricao').addEventListener('input', e=>$('#contador').textContent=`${e.target.value.length}/1500`);
+$('#contato-telefone').addEventListener('input', e=>{
+  let n=e.target.value.replace(/\D/g,'').slice(0,11);
+  e.target.value=n.length>10
+    ? `(${n.slice(0,2)}) ${n.slice(2,7)}-${n.slice(7)}`
+    : n.length>6
+      ? `(${n.slice(0,2)}) ${n.slice(2,6)}-${n.slice(6)}`
+      : n.length>2
+        ? `(${n.slice(0,2)}) ${n.slice(2)}`
+        : n;
+});
+
+$('#form-ocorrencia').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const form=e.currentTarget;
+  form.querySelectorAll('.invalid').forEach(x=>x.classList.remove('invalid'));
+  if(!form.checkValidity()){
+    form.reportValidity();
+    return;
+  }
+  const btn=form.querySelector('button[type=submit]');
+  btn.disabled=true;
+  btn.firstElementChild.textContent='Enviando...';
+  try {
+    const data=await api('/Ocorrencias',{
+      method:'POST',
+      body:JSON.stringify({
+        categoriaId:+$('#categoria').value,
+        descricao:$('#descricao').value.trim(),
+        endereco:$('#endereco').value.trim(),
+        contatoNome:$('#contato-nome').value.trim(),
+        contatoEmail:$('#contato-email').value.trim()||null,
+        contatoTelefone:$('#contato-telefone').value.trim()||null
+      })
+    });
+    form.reset();
+    $('#contador').textContent='0/1500';
+    $('#form-status').textContent=`Ocorrência #${data.id} registrada com sucesso.`;
+    $('#form-status').className='feedback success';
+    toast(`Chamado #${data.id} enviado com sucesso.`);
+  }
+  catch(err){
+    $('#form-status').textContent=err.message;
+    $('#form-status').className='feedback error';
+  }
+  finally {
+    btn.disabled=false;
+    btn.firstElementChild.textContent='Enviar ocorrência';
+  }
+});
+
+$('#form-login').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const btn=e.currentTarget.querySelector('button');
+  btn.disabled=true;
+  btn.textContent='Entrando...';
+  try {
+    const data=await api('/Auth/login',{
+      method:'POST',
+      body:JSON.stringify({usuario:$('#usuario').value.trim(),senha:$('#senha').value})
+    });
+    tokenJWT=data.token;
+    sessionStorage.setItem('zeladoria_token',tokenJWT);
+    sessionStorage.setItem('zeladoria_nome',data.nome);
+    $('#status-login').textContent='';
+    renderAuthState();
+    toast('Login realizado com sucesso.');
+  }
+  catch(err){
+    $('#status-login').textContent=err.message;
+    $('#status-login').className='feedback error';
+  }
+  finally {
+    btn.disabled=false;
+    btn.textContent='Entrar no painel';
+  }
+});
+
+function logout(show=true){
+  tokenJWT='';
+  sessionStorage.removeItem('zeladoria_token');
+  sessionStorage.removeItem('zeladoria_nome');
+  renderAuthState();
+  if(show) toast('Sessão encerrada.','info');
+}
+$('#btn-sair').addEventListener('click',()=>logout());
+
+function renderAuthState(){
+  const logged=!!tokenJWT;
+  $('#login-section').classList.toggle('hidden',logged);
+  $('#dashboard').classList.toggle('hidden',!logged);
+  if(logged){
+    $('#admin-welcome').textContent=`Olá, ${sessionStorage.getItem('zeladoria_nome')||'operador'}. Acompanhe e atualize os chamados registrados.`;
+    carregarOcorrencias();
+  }
+}
+
+async function carregarOcorrencias(){
+  const el=$('#lista-ocorrencias');
+  el.innerHTML='<div class="state">Carregando ocorrências…</div>';
+  try {
+    ocorrenciasCache=await api('/Ocorrencias');
+    atualizarStats();
+    renderLista();
+  } catch(err){
+    el.innerHTML=`<div class="state error">${esc(err.message)}</div>`;
+  }
+}
+
+function atualizarStats(){
+  $('#stat-total').textContent=ocorrenciasCache.length;
+  $('#stat-pendente').textContent=ocorrenciasCache.filter(o=>o.situacao==='Pendente').length;
+  $('#stat-andamento').textContent=ocorrenciasCache.filter(o=>o.situacao==='Em Andamento').length;
+  $('#stat-concluido').textContent=ocorrenciasCache.filter(o=>o.situacao==='Concluído').length;
+}
+
+function renderLista(){
+  const q=$('#busca').value.toLowerCase().trim();
+  const status=$('#filtro-status').value;
+  const rows=ocorrenciasCache.filter(o=>(!status||o.situacao===status)&&(!q||String(o.id).includes(q)||o.descricao.toLowerCase().includes(q)||o.endereco.toLowerCase().includes(q)));
+  if(!rows.length){
+    $('#lista-ocorrencias').innerHTML='<div class="state">Nenhuma ocorrência encontrada com esses filtros.</div>';
+    return;
+  }
+  $('#lista-ocorrencias').innerHTML=rows.map(o=>`<article class="occ-card"><div class="occ-main"><div class="occ-top"><span class="id">Chamado #${o.id}</span><span class="status ${o.situacao==='Concluído'?'done':o.situacao==='Em Andamento'?'progress':'pending'}">${esc(o.situacao)}</span><span class="date">${new Date(o.dataCriacao).toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'})}</span></div><h3>${esc(o.categoria?.nome||'Ocorrência')}</h3><p>${esc(o.descricao)}</p><div class="meta"><span>📍 ${esc(o.endereco)}</span><span>👤 ${esc(o.contatoNome)}</span>${o.contatoEmail?`<span>✉️ ${esc(o.contatoEmail)}</span>`:''}${o.contatoTelefone?`<span>📞 ${esc(o.contatoTelefone)}</span>`:''}</div></div><div class="occ-actions"><label>Status<select data-status-id="${o.id}"><option ${o.situacao==='Pendente'?'selected':''}>Pendente</option><option ${o.situacao==='Em Andamento'?'selected':''}>Em Andamento</option><option ${o.situacao==='Concluído'?'selected':''}>Concluído</option></select></label><button class="btn danger" data-delete-id="${o.id}">Excluir</button></div></article>`).join('');
+}
+
+$('#lista-ocorrencias').addEventListener('change',async e=>{
+  if(!e.target.matches('[data-status-id]')) return;
+  const id=e.target.dataset.statusId;
+  try{
+    await api(`/Ocorrencias/${id}/status`,{method:'PATCH',body:JSON.stringify({situacao:e.target.value})});
+    const o=ocorrenciasCache.find(x=>x.id==id);
+    if(o) o.situacao=e.target.value;
+    atualizarStats();
+    renderLista();
+    toast(`Status do chamado #${id} atualizado.`);
+  }catch(err){
+    toast(err.message,'error');
+    carregarOcorrencias();
+  }
+});
+
+$('#lista-ocorrencias').addEventListener('click',async e=>{
+  const btn=e.target.closest('[data-delete-id]');
+  if(!btn) return;
+  const id=btn.dataset.deleteId;
+  if(!confirm(`Excluir definitivamente a ocorrência #${id}?`)) return;
+  try{
+    await api(`/Ocorrencias/${id}`,{method:'DELETE'});
+    ocorrenciasCache=ocorrenciasCache.filter(x=>x.id!=id);
+    atualizarStats();
+    renderLista();
+    toast(`Ocorrência #${id} excluída.`);
+  }catch(err){
+    toast(err.message,'error');
+  }
+});
+
+$('#busca').addEventListener('input',renderLista);
+$('#filtro-status').addEventListener('change',renderLista);
+$('#btn-atualizar').addEventListener('click',carregarOcorrencias);
+
+carregarCategorias();
+renderAuthState();
+</script>
+</body>
+</html>

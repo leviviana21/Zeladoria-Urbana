@@ -1,0 +1,6 @@
+@ZeladoriaUrbana.API_HostAddress = http://localhost:5207
+
+GET {{ZeladoriaUrbana.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

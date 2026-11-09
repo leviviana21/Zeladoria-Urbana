@@ -19,7 +19,7 @@ API desenvolvida em C# com .NET (arquitetura backend para a solução de Zelador
 
 ## 👤 Autor
 
-Desenvolvido por **Levi Viana da Silva**[cite: 1].
+Desenvolvido por **Levi Viana da Silva**
 
-* **LinkedIn:** [www.linkedin.com/in/leviviana21](https://www.linkedin.com/in/leviviana21)[cite: 1]
+* **LinkedIn:** [www.linkedin.com/in/leviviana21](https://www.linkedin.com/in/leviviana21)
 * **GitHub:** [leviviana21](https://github.com/leviviana21)
